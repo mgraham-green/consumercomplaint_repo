@@ -62,6 +62,10 @@ ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Ap
 ### Chart C
 
 ```{r}
-
+DT::datatable((complaints) %>%
+  filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% 
+  count(issue, sub_issue, sort = TRUE),colnames=c('Issue', 'Subissue','Number of Complaints'), options = list(
+  bPaginate = FALSE 
+))
 ```
 
