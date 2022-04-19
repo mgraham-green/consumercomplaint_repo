@@ -1,5 +1,5 @@
 ---
-title: "Consumer Complaints"
+title: "Consumer Complaints in New England"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -23,6 +23,9 @@ complaints <- readRDS("/Users/michaelgraham-green/Downloads/complaints.rds")
 
 complaints_NE <- complaints %>% 
   filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% count(state)
+
+complaints_date <- complaints %>% 
+  filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% count(mm_yy_sent_to_company) %>% extract(mm_yy_sent_to_company, c("Month", "2020"), "([[:alnum:]]+) ([[:alnum:]]+)")
 ```
 
 Column {data-width=650}
@@ -47,7 +50,13 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-
+ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')), y = n, group = 1)) +
+  geom_line(color="#cc0000") +
+  geom_point() + 
+  labs(title = "Complaints Over 2020",
+              caption = "Data source: Consumer Financial Protection Bureau",
+              x = "Month", y = "# of Complaints") +
+  theme_economist()
 ```
 
 ### Chart C
