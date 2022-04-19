@@ -1,0 +1,50 @@
+---
+title: "Consumer Complaints"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(readxl)
+library(writexl)
+library(DT)
+library(dplyr)
+library(ggplot2)
+
+complaints <- readRDS("/Users/michaelgraham-green/Downloads/complaints.rds")
+
+complaints_NE <- complaints %>% 
+  filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI'))
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+ggplot2::ggplot(data = complaints_NE, aes(x = weight, y = hindfoot_length)) +
+    geom_point())
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
