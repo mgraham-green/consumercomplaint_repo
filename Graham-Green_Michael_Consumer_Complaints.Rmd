@@ -35,6 +35,8 @@ Column {data-width=650}
 
 ### Breaking Down New England Student Loan Complaints to CFPB by State
 
+<!-- This graph was based on a data frame I made above, filtering for only the New England states and then counting the number of incidents in each state. I made a simple bar graph here to display that data, and chose the Economist theme for the background coloring. -->
+
 ```{r}
 ggplot2::ggplot(data = complaints_NE, aes(x = state, y = n)) +
     geom_bar(stat = "identity", fill = "#cc0000") +
@@ -51,6 +53,8 @@ Column {data-width=350}
 
 ### Timeline of New England Student Loan Complaint Filing Dates
 
+<!-- I created the separate data frame above to separate out the dates complaints were filed, and then break down the date into separate month and year categories. Once I had that new data frame complete, I turned it into a timeline with this graph, although I had to specify the order of the months on the x-axis so that they would not default to alphabetical order. -->
+
 ```{r}
 ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')), y = n, group = 1)) +
   geom_line(color="#cc0000") +
@@ -62,6 +66,8 @@ ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Ap
 ```
 
 ### Breakdown of Complaints by Issue Area
+
+<!-- I filtered student loan issues and New England states and included the designated issue and sub issue in this chart. I also included a count of how many times the same issue occurred. -->
 
 ```{r}
 DT::datatable((complaints) %>%
