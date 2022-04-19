@@ -16,11 +16,13 @@ library(writexl)
 library(DT)
 library(dplyr)
 library(ggplot2)
+library(bbplot)
+library(ggthemes)
 
 complaints <- readRDS("/Users/michaelgraham-green/Downloads/complaints.rds")
 
 complaints_NE <- complaints %>% 
-  filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI'))
+  filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% count(state)
 ```
 
 Column {data-width=650}
@@ -29,8 +31,14 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
-ggplot2::ggplot(data = complaints_NE, aes(x = weight, y = hindfoot_length)) +
-    geom_point())
+ggplot2::ggplot(data = complaints_NE, aes(x = state, y = n)) +
+    geom_bar(stat = "identity", fill = "#cc0000") +
+  geom_text(aes(label=n), position=position_dodge(width=0.9), vjust=-0.25) + 
+  labs(title = "Complaints About Student Loans by State",
+              subtitle = "2020",
+              caption = "Data source: Consumer Financial Protection Bureau",
+              x = "State", y = "# of Complaints") +
+  theme_economist() 
 ```
 
 Column {data-width=350}
