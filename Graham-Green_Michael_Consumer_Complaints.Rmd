@@ -1,9 +1,11 @@
 ---
-title: "Consumer Complaints in New England"
+title: "CFPB Student Loan Complaints in New England (2020)"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    social: [ "twitter", "facebook", "menu" ]
+    theme: united
 ---
 
 ```{r setup, include=FALSE}
@@ -31,7 +33,7 @@ complaints_date <- complaints %>%
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Breaking Down New England Student Loan Complaints to CFPB by State
 
 ```{r}
 ggplot2::ggplot(data = complaints_NE, aes(x = state, y = n)) +
@@ -47,7 +49,7 @@ ggplot2::ggplot(data = complaints_NE, aes(x = state, y = n)) +
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Timeline of New England Student Loan Complaint Filing Dates
 
 ```{r}
 ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')), y = n, group = 1)) +
@@ -59,7 +61,7 @@ ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Ap
   theme_economist()
 ```
 
-### Chart C
+### Breakdown of Complaints by Issue Area
 
 ```{r}
 DT::datatable((complaints) %>%
