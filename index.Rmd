@@ -33,7 +33,16 @@ About
 =====================================
 
 ### About this Dashboard
-
+  This dashboard is designed to provide information on consumer complaints regarding student loans. Being from Massachusetts, I decided to focus on the New England region for this page, and I chose student loan complaints out of the numerous possible complaint subjects due to the presence of the student loan repayment issue in the mainstream political discussion as this page was created, in Spring 2022. The data on these consumer complaints regarding student loans comes from the Consumer Financial Protection Bureau, and the set of complaints used for this page were submitted to the CFPB in 2020.
+  
+  This page, the "About" page, includes an introduction to this project and the information covered on the following pages. The "Graphs" page includes 2 illustrations of the data. The first illustration is a bar graph, breaking down the number of student loans consumer complaints by New England state; MA had the most, with 16, while VT and RI were tied for the least, with 2 each. The second graph displays how many student loans complaints were submitted in New England in 2020; complaints reached a clear peak in August. Viewers will also note that the data collected from the CFPB website only includes the months of March through December in 2020.
+  
+  The final page, the "Tables" page, breaks down the complaint data based on different variables. The top table of the two on this page breaks down the complaints by issue area, as well as the more specific subissue. The bottom of the two charts breaks down the complaint cases by the company servicing the student loan. Both data tables have a built-in search bar, allowing users to look for a specific issue or company. 
+  
+  Next to the title on the dashboard's toolbar are buttons to share this dashboard on various social media platforms, if users who found this information helpful would like to spread the info this dashboard offers.
+  
+  Thank you for visiting!
+  -Michael Graham-Green
 
 Graphs
 =====================================
@@ -92,12 +101,12 @@ DT::datatable((complaints) %>%
 
 Column {data-width=400}
 -----------------------------------------------------------------------
-### Breakdown of Cases by Company Response
+### Breakdown of Cases by Company
 
 ```{r}
 DT::datatable((complaints) %>%
   filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% 
-  count(company_response_to_consumer, sort = TRUE),colnames=c('Company Response To Consumer','Number of Complaints'), options = list(
+  count(company, sort = TRUE),colnames=c('Company','Number of Complaints'), options = list(
   bPaginate = FALSE 
 ))
 ```
