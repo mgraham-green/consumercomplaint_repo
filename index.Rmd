@@ -29,6 +29,11 @@ complaints_NE <- complaints %>%
 complaints_date <- complaints %>% 
   filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% count(mm_yy_sent_to_company) %>% extract(mm_yy_sent_to_company, c("Month", "2020"), "([[:alnum:]]+) ([[:alnum:]]+)")
 ```
+About
+=====================================
+
+### About this Dashboard
+
 
 Graphs
 =====================================
@@ -68,8 +73,11 @@ ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Ap
   theme_economist()
 ```
 
-Tables
+Tables {data-orientation=rows}
 =====================================
+
+Column {data-width=600}
+-----------------------------------------------------------------------
 ### Breakdown of Complaints by Issue Area
 
 <!-- I filtered student loan issues and New England states and included the designated issue and sub issue in this chart. I also included a count of how many times the same issue occurred. -->
@@ -78,6 +86,18 @@ Tables
 DT::datatable((complaints) %>%
   filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% 
   count(issue, sub_issue, sort = TRUE),colnames=c('Issue', 'Subissue','Number of Complaints'), options = list(
+  bPaginate = FALSE 
+))
+```
+
+Column {data-width=400}
+-----------------------------------------------------------------------
+### Breakdown of Cases by Company Response
+
+```{r}
+DT::datatable((complaints) %>%
+  filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% 
+  count(company_response_to_consumer, sort = TRUE),colnames=c('Company Response To Consumer','Number of Complaints'), options = list(
   bPaginate = FALSE 
 ))
 ```
