@@ -30,7 +30,10 @@ complaints_date <- complaints %>%
   filter(product == 'Student loan', state == c('MA', 'ME', 'NH', 'VT', 'CT', 'RI')) %>% count(mm_yy_sent_to_company) %>% extract(mm_yy_sent_to_company, c("Month", "2020"), "([[:alnum:]]+) ([[:alnum:]]+)")
 ```
 
-Column {data-width=650}
+Graphs
+=====================================
+
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Breaking Down New England Student Loan Complaints to CFPB by State
@@ -48,7 +51,7 @@ ggplot2::ggplot(data = complaints_NE, aes(x = state, y = n)) +
   theme_economist() 
 ```
 
-Column {data-width=350}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Timeline of New England Student Loan Complaint Filing Dates
@@ -65,6 +68,8 @@ ggplot2::ggplot(data = complaints_date, aes(x = factor(Month, level=c('Mar', 'Ap
   theme_economist()
 ```
 
+Tables
+=====================================
 ### Breakdown of Complaints by Issue Area
 
 <!-- I filtered student loan issues and New England states and included the designated issue and sub issue in this chart. I also included a count of how many times the same issue occurred. -->
